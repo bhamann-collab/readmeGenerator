@@ -1,34 +1,93 @@
 var fs = require('fs');
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-var request = new XMLHttpRequest();
-var urlExists = require('url-exists');
 
 
-// request.open('GET', 'https://api.github.com/repos/facebook/react', true)
-// request.responseType = 'json';
-// request.onload = function() {
-//     var status = request.status
-//     if (status === 200) {
-//         var dataObj = JSON.parse(request.responseText)
-//         console.log(`Name: ${dataObj.name}`)
-//         console.log(`Description: ${dataObj.description}`)
-//         console.log(`License: ${dataObj.license}`)
-//         urlExists('https://www.npmjs.com/package/react', function(err, exists) {
-//             if(exists === true) {
-//                 console.log(`Installation: npm install react`)
-//             } else {
-//                 console.log(`Installation: Not found`)
-//             } 
-//         });
+const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+  })
 
-//     }
-// }
-// request.send()
+const input1 = () => {
+    return new Promise((resolve, reject) => {
+        readline.question(`What's your GitHub username? `, function(name) {
+            resolve(name)
+            resolve()
+          })
+    })
+}
+
+const input2 = () => {
+    return new Promise((resolve, reject) => {
+        readline.question(`What's your Project name? `, function(name) {
+            resolve(name)
+            resolve()
+          })
+    })
+}
+
+const input3 = () => {
+    return new Promise((resolve, reject) => {
+        readline.question(`What's your email that's linked to your Github? `, function(name) {
+            resolve(name)
+            resolve()
+          })
+    })
+}
+
+const main = async () => {
+    //Calling the inputs one by one
+    const userName = await input1()
+    const projectName = await input2()
+    const email = await input3();
+    readline.close()
+    //Content for the readme file
+    let stringContent = `# ${projectName}
+
+## Description
+
+description
+
+## Table of Contents
+
+Table of Contents
+
+## Installation
+
+Installation
+
+## Usage
+
+Usage
+
+## License
+
+License
+
+## Contributing
+
+Contributing
+
+## Tests
+
+Tests
+
+## Questions
+
+### User GitHub profile picture
+
+Yes or No
+
+### User GitHub email
+
+username: ${userName} email: ${email}`
+
+    //write file to README.md
+    fs.writeFile('TEST.md', stringContent, function (err) {
+        if (err) throw err;
+    })
+}
+
+main();
 
 
 
-fs.writeFile('TEST.md','generates a readme file', function (err) {
-    if (err) throw err;
-    console.log('File is created successfully.')
-})
 

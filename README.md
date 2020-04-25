@@ -1,2 +1,1 @@
-# readmeGenerator
-A program that will generate a README.md file from the input of a user.
+Run 'node index.js' within this directory, answer the questions by pressing enter and a readme file under the name TEST.md will be generated within the directory.
